@@ -3,7 +3,7 @@ title: Requirements Analysis - ZameenMitra
 author: Vijendra
 date_created: 2026-05-06
 date_modified: 2026-05-06
-status: Draft
+status: Active
 ---
 
 # Requirements Analysis

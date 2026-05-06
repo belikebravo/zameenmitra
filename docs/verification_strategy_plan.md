@@ -44,7 +44,7 @@ There is no public "standard pricing" as B2B APIs use enterprise-negotiated tier
 | **Manual Verification (Lawyers)** | ₹2,000 - ₹10,000+ per property | **None** | **None** |
 | **Basic Document OCR (AWS Textract)**| ₹0.10 - ₹1 per page | **Medium** (Parsing logic) | **Low** |
 
-> **Cost Strategy:** Because property verification APIs are expensive (₹10-₹50+ per hit compared to ₹1-₹2 for Aadhaar), we cannot verify every document upon free upload. Verification should be triggered by a user action (e.g., paying a "Token Verification Fee" or as part of a premium tier).
+**Cost Strategy:** Because property verification APIs are expensive (₹10-₹50+ per hit compared to ₹1-₹2 for Aadhaar), we cannot verify every document upon free upload. Verification should be triggered by a user action (e.g., paying a "Token Verification Fee" or as part of a premium tier).
 
 ---
 
