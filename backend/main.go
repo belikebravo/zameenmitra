@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
@@ -22,6 +23,7 @@ func main() {
 	})
 
 	// Middleware
+	app.Use(cors.New())
 	app.Use(logger.New())
 
 	// Health check
@@ -47,6 +49,6 @@ func main() {
 		})
 	})
 
-	log.Println("Starting ZameenMitra API on port 3000...")
-	log.Fatal(app.Listen(":3000"))
+	log.Println("Starting ZameenMitra API on port 8080...")
+	log.Fatal(app.Listen(":8080"))
 }
