@@ -2,17 +2,24 @@ package com.zameenmitra.client
 
 import io.ktor.client.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 
 class ZameenMitraApiClient {
     private val client = HttpClient()
 
+    // Real multipart form data upload
     suspend fun uploadDocument(fileBytes: ByteArray, fileName: String): String {
-        // Stub for POC: Sending bytes to the backend
-        val response: HttpResponse = client.post("http://localhost:3000/api/v1/vault/upload") {
-            // Note: Real implementation will use MultiPartFormDataContent
-            setBody(fileBytes)
-        }
+        val response: HttpResponse = client.submitFormWithBinaryData(
+            url = "http://10.0.2.2:3000/api/v1/vault/upload", // 10.0.2.2 is localhost for Android emulator
+            formData = formData {
+                append("document", fileBytes, Headers.build {
+                    append(HttpHeaders.ContentType, "application/octet-stream")
+                    append(HttpHeaders.ContentDisposition, "filename=\"$fileName\"")
+                })
+            }
+        )
         return response.bodyAsText()
     }
 }
