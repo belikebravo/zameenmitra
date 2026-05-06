@@ -18,5 +18,8 @@ Welcome to the central documentation repository for **ZameenMitra**. This folder
 - [Tech Stack & Architecture](./tech_stack_architecture.md)
   Outlines the system architecture, proposed technology choices (Frontend, Backend, Database, Cloud), and security considerations.
 
+- [Verification Strategy & Implementation Plan](./verification_strategy_plan.md)
+  Analysis of land record validation sources in India, cost estimates, and an implementation plan addressing real-world challenges.
+
 ---
 *Note for AI Agents: These documents are designed to provide clear, structured context. Please refer to `requirements_analysis.md` for feature validation and `tech_stack_architecture.md` for architectural context when generating code.*
