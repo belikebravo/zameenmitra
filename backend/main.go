@@ -8,12 +8,13 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
-// VaultUploadResponse defines the shape of the successful upload response
 type VaultUploadResponse struct {
-	Message      string `json:"message"`
-	DocumentID   string `json:"document_id"`
-	OriginalName string `json:"original_name"`
-	Status       string `json:"status"`
+	Message          string               `json:"message"`
+	DocumentID       string               `json:"document_id"`
+	OriginalName     string               `json:"original_name"`
+	Status           string               `json:"status"`
+	ExtractedRecord  PropertyRecord       `json:"extracted_record"`
+	ValidationResult GovtValidationResult `json:"validation_result"`
 }
 
 func main() {
@@ -35,17 +36,25 @@ func main() {
 	api := app.Group("/api/v1")
 	vault := api.Group("/vault")
 
-	// Endpoint to upload a document
 	vault.Post("/upload", func(c *fiber.Ctx) error {
-		// In a real implementation, we would use c.FormFile("document") to retrieve the file,
-		// validate it, and upload it to AWS S3.
-		// For the POC, we'll return a mock successful response.
-		
+		filename := "sale_deed.pdf"
+		if file, err := c.FormFile("document"); err == nil {
+			filename = file.Filename
+		}
+
+		// 1. Parse the document using OCR/NLP mock
+		record := ParseDocument(filename, []byte("mock file data"))
+
+		// 2. Validate with Govt API mock
+		validation := VerifyWithGovtAPI(record)
+
 		return c.Status(fiber.StatusOK).JSON(VaultUploadResponse{
-			Message:      "Document successfully uploaded and queued for processing.",
-			DocumentID:   "doc_12345abcde",
-			OriginalName: "sale_deed.pdf",
-			Status:       "pending_verification",
+			Message:          "Document processed and verified successfully.",
+			DocumentID:       "doc_12345abcde",
+			OriginalName:     filename,
+			Status:           "verified",
+			ExtractedRecord:  record,
+			ValidationResult: validation,
 		})
 	})
 

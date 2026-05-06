@@ -51,7 +51,17 @@ fun VaultScreen() {
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Server Response: ${state.response}")
+                
+                val res = state.response
+                Text(text = "Status: ${res.status}")
+                if (res.extracted_record != null) {
+                    Text(text = "Survey No: ${res.extracted_record!!.survey_number}")
+                }
+                if (res.validation_result != null) {
+                    Text(text = "Verified Owner: ${res.validation_result!!.registered_owner}")
+                    Text(text = "Encumbrances: ${res.validation_result!!.encumbrance_status}")
+                }
+                
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = { viewModel.resetState() }) {
                     Text("Upload Another Document")

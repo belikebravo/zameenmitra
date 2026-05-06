@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 sealed class UploadState {
     object Idle : UploadState()
     object Loading : UploadState()
-    data class Success(val response: String) : UploadState()
+    data class Success(val response: VaultUploadResponse) : UploadState()
     data class Error(val message: String) : UploadState()
 }
 
